@@ -4,6 +4,7 @@
 {% block content %}
 <!-- ラジオボタン表示 -->
 <form id="playlistForm" class="mt-4">
+    <div class="form">
     <div class="form-group">
         {% for playlist in playlists_name %}
             <div class="form-check">
@@ -15,6 +16,7 @@
         {% endfor %}
     </div>
     <button type="submit" class="btn btn-primary">選択完了</button>
+    </div>
 </form>
 
 <div class="huge_button">
