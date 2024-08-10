@@ -3,12 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}カラクト{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <h1 class="title">カラクト<br>
-        <span class="subtitle">～カラオケ選曲～</span>
-    </h1>
-    {% block content %}{% endblock %}
+<body class="bg-light">
+    <div class="container">
+        <h1 class="title text-primary text-center mt-5">カラクト<br>
+            <span class="subtitle text-success">～カラオケ選曲～</span>
+        </h1>
+        {% block content %}{% endblock %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
