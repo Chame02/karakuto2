@@ -17,7 +17,11 @@
     <button type="submit" class="btn btn-primary">選択完了</button>
 </form>
 
-<button onclick="location.href='{{ url_for('edit') }}';" class="btn btn-success mt-3">プレイリストを追加</button>
+<div class="huge_button">
+    <button onclick="location.href='{{ url_for('edit') }}';" class="btn btn-success mt-3">プレイリストを追加</button>
+    <button onclick="location.href='{{ url_for('register') }}';" class="btn btn-success mt-3">ユーザー登録</button>
+</div>
+
 
 <script>
     document.getElementById('playlistForm').addEventListener('submit', function(event) {

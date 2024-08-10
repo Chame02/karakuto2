@@ -85,8 +85,6 @@ def conf_user():
     username = request.args.get('username')
     return render_template('conf_user.html', username=username)
 
-@app.route('/userAll')
-def userall():
 
 if __name__=='__main__':
     with app.app_context():
