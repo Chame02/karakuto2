@@ -48,8 +48,11 @@
 
     function showConfirmationPage() {
         const songContainer = document.getElementById('songContainer');
+        const playlist_name = document.getElementById('playlist_name')
         const songs = songContainer.getElementsByClassName('song');
         let confirmationHTML = '';
+
+        confirmationHTML += `${playlist_name.value}`
 
         for (let i = 0; i < songs.length; i++) {
             const artist = songs[i].querySelector(`input[name="artist"]`).value;
