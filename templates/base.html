@@ -8,10 +8,14 @@
 </head>
 <body class="bg-light">
     <div class="container">
-        <h1 class="title text-primary text-center mt-5">カラクト<br>
-            <span class="subtitle text-success">～カラオケ選曲～</span>
-        </h1>
-        {% block content %}{% endblock %}
+        <header>
+            <h1 class="title text-primary text-center mt-5">カラクト<br>
+                <span class="subtitle text-success">～カラオケ選曲～</span>
+            </h1>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
