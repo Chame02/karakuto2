@@ -7,11 +7,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+# プレイリストのデータベース
 class AllPlaylist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     artist = db.Column(db.String(128), nullable=False)
     song = db.Column(db.String(128), nullable=False)
     playlist = db.Column(db.String(128), nullable=False)
+
+# ユーザーのデータベース
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False, unique=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password = db.Column(db.String(120), nullable=False)
 
 # ホームページ
 @app.route('/')
@@ -56,6 +64,12 @@ def confirmation():
     songs = request.args.getlist('songs')
     playlists = [[artists[i], songs[i]] for i in range(len(artists))]
     return render_template('confirmation.html',title=title, playlists=playlists)
+
+@app.route('/register', method=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.
 
 if __name__=='__main__':
     with app.app_context():
