@@ -85,6 +85,13 @@ def conf_user():
     username = request.args.get('username')
     return render_template('conf_user.html', username=username)
 
+@app.route('/check_users')
+def check_users():
+    users = User.query.all()
+    if users:
+        return f"Total users: {len(users)}"
+    else:
+        return "No users found"
 
 if __name__=='__main__':
     with app.app_context():
