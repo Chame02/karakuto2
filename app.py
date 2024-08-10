@@ -7,11 +7,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+# プレイリストのデータベース
 class AllPlaylist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     artist = db.Column(db.String(128), nullable=False)
     song = db.Column(db.String(128), nullable=False)
     playlist = db.Column(db.String(128), nullable=False)
+
+# ユーザーのデータベース
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), nullable=False, unique=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password = db.Column(db.String(120), nullable=False)
 
 # ホームページ
 @app.route('/')
@@ -56,6 +64,29 @@ def confirmation():
     songs = request.args.getlist('songs')
     playlists = [[artists[i], songs[i]] for i in range(len(artists))]
     return render_template('confirmation.html',title=title, playlists=playlists)
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        new_user= User(username=username, email=email, password=password)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('conf_user', username=username))
+    else:
+        return render_template('user_reg.html')
+
+# ユーザー登録完了後のリダイレクトページ
+@app.route('/conf_user')
+def conf_user():
+    username = request.args.get('username')
+    return render_template('conf_user.html', username=username)
+
+@app.route('/userAll')
+def userall():
 
 if __name__=='__main__':
     with app.app_context():
