@@ -60,6 +60,39 @@
         .song {
             margin-bottom: 20px;
         }
+         /* レスポンシブデザイン */
+         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .title {
+                font-size: 1.5em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            label {
+                padding: 8px;
+            }
+            button {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.2em;
+            }
+            .subtitle {
+                font-size: 0.9em;
+            }
+            label {
+                padding: 6px;
+            }
+            button {
+                padding: 6px 12px;
+            }
+        }
     </style>
 </head>
 <body class="bg-light">
