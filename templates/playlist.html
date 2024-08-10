@@ -36,8 +36,10 @@
         const mainElement = document.querySelector('main');
         mainElement.innerHTML = `
             <h1>${selectedSong.artist}の${selectedSong.song}が選ばれました！！</h1>
-            <button onclick="location.href='{{ url_for('index') }}';" class="btn btn-success mt-3">ホームに戻る</button>
-            <button id="retryButton" class="btn btn-success mt-3">もう一度選ぶ</button>
+            <div class="button-container">
+                <button onclick="location.href='{{ url_for('index') }}';" class="btn btn-success mt-3">ホームに戻る</button>
+                <button id="retryButton" class="btn btn-success mt-3">もう一度選ぶ</button>
+            </div>
         `;
 
         // もう一度選ぶボタンが押されたときの処理
