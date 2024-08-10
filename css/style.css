@@ -1,0 +1,16 @@
+h1{
+    text-align: left;
+    color: pink;
+    width: 15%;
+    background-color: beige;
+    line-height: 1.2em;
+}
+h1 .subtitle{
+    font-size: 0.7em;
+}
+.add{
+    text-align: center;
+}
+h2{
+    
+}

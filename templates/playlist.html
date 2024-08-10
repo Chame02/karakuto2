@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}プレイリスト{% endblock %}
+
+{% block content%}
+<h1>{{ name }}</h1>
+<ul id="playlist">
+    {% for item in playlist %}
+        <li>{{ item.artist }} - {{ item.song }}</li>
+    {% endfor %}
+</ul>
+<button onclick="location.href='{{ url_for('index') }}';">戻る</button>
+<button id="okButton">OK</button>
+
+<script>
+    // プレイリストのデータをJavaScriptで保持
+    const playlistData = [
+        {% for item in playlist %}
+            { artist: "{{ item.artist }}", song: "{{ item.song }}" },
+        {% endfor %}
+    ];
+
+    // ランダムに曲を選ぶ関数
+    function getRandomSong() {
+        const randomIndex = Math.floor(Math.random() * playlistData.length);
+        return playlistData[randomIndex];
+    }
+
+    // OKボタンが押されたときの処理
+    document.getElementById('okButton').addEventListener('click', function() {
+        const selectedSong = getRandomSong();
+        updateSelection(selectedSong);
+    });
+
+    // 選択結果を更新する関数
+    function updateSelection(selectedSong) {
+        document.body.innerHTML = `
+            <h1>${selectedSong.artist}の${selectedSong.song}が選ばれました！！</h1>
+            <button onclick="location.href='{{ url_for('index') }}';">ホームに戻る</button>
+            <button id="retryButton">もう一度選ぶ</button>
+        `;
+
+        // もう一度選ぶボタンが押されたときの処理
+        document.getElementById('retryButton').addEventListener('click', function() {
+            const newSelectedSong = getRandomSong();
+            updateSelection(newSelectedSong);
+        });
+    }
+</script>
+{% endblock %}

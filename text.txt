@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}カラクト{% endblock %}
+
+{% block content%}
+
+{% endblock %}
+
+何をやるか
+・ユーザ登録
+・spotify API
+・CSS
+・諸々の調整

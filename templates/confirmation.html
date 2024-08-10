@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}登録完了{% endblock %}
+
+{% block content%}
+    <h1>新しいプレイリストを登録しました！</h1>
+    <h2>プレイリスト名：  {{ title }}</h2>
+    {% for playlist in playlists %}
+    <p>{{ loop.index }}曲目: アーティスト名 - {{ playlist[0] }}, 曲名 - {{ playlist[1] }}</p>
+    {% endfor %}
+    <button onclick="location.href='{{ url_for('index') }}';">ホームに戻る</button>
+{% endblock %}

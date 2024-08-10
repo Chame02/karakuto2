@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}曲の登録{% endblock %}
+
+{% block content%}
+<form id="songForm" action="/edit" method="post">
+    <div id="songContainer">
+        <div>
+            <label for="playlist_name">プレイリスト名</label>
+            <input type="text" id="playlist_name" name="playlist_name">
+        </div>
+        <div class="song">
+            <h4>１曲目</h4>
+            <label for="artist1">アーティスト名:</label>
+            <input type="text" id="artist1" name="artist">
+            <label for="song1">曲名:</label>
+            <input type="text" id="song1" name="song">
+        </div>
+    </div>
+    <button type="button" onclick="addSong()">曲を追加</button>
+    <button type="button" onclick="showConfirmationPage()">次へ</button>
+</form>
+
+<!-- 確認ページを隠しておく -->
+<div id="confirmationPage" style="display: none;">
+    <h2>確認ページ</h2>
+    <div id="confirmationContent"></div>
+    <button onclick="goBack()">戻る</button>
+    <button onclick="submitForm()">送信</button>
+</div>
+
+<script>
+    let songCount = 1;
+
+    function addSong() {
+        songCount++;
+        const songContainer = document.getElementById('songContainer');
+        const newSongDiv = document.createElement('div');
+        newSongDiv.className = 'song';
+        newSongDiv.innerHTML = `
+            <h4>${songCount}曲目</h4>
+            <label for="artist${songCount}">アーティスト名:</label>
+            <input type="text" id="artist${songCount}" name="artist">
+            <label for="song${songCount}">曲名:</label>
+            <input type="text" id="song${songCount}" name="song">
+        `;
+        songContainer.appendChild(newSongDiv);
+    }
+
+    function showConfirmationPage() {
+        const songContainer = document.getElementById('songContainer');
+        const songs = songContainer.getElementsByClassName('song');
+        let confirmationHTML = '';
+
+        for (let i = 0; i < songs.length; i++) {
+            const artist = songs[i].querySelector(`input[name="artist"]`).value;
+            const song = songs[i].querySelector(`input[name="song"]`).value;
+            confirmationHTML += `<p>${i + 1}曲目: アーティスト名 - ${artist}, 曲名 - ${song}</p>`;
+        }
+
+        document.getElementById('confirmationContent').innerHTML = confirmationHTML;
+        // フォームページを隠す
+        document.getElementById('songForm').style.display = 'none';
+        // 確認ページを表示
+        document.getElementById('confirmationPage').style.display = 'block';
+    }
+
+    function goBack() {
+        // フォームページを表示
+        document.getElementById('songForm').style.display = 'block';
+        // 確認ページを隠す
+        document.getElementById('confirmationPage').style.display = 'none';
+    }
+
+    function submitForm() {
+        // フォームのデータを送信する
+        document.getElementById('songForm').submit();
+    }
+</script>
+{% endblock %}

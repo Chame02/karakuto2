@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}カラクト{% endblock %}
+
+{% block content%}
+<!-- ラジオボタン表示 -->
+<form id="playlistForm">
+    {% for playlist in playlists_name %}
+        <input type="radio" name="playlist" value="{{playlist}}">{{playlist}}<br>
+    {% endfor %}
+    <button type="submit">選択完了</button>
+</form>
+
+<button onclick="location.href='{{ url_for('edit') }}';">プレイリストを追加</button>
+
+<script>
+    document.getElementById('playlistForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // フォームのデフォルトの送信を防ぐ
+        const selectedPlaylist = document.querySelector('input[name="playlist"]:checked').value;
+        window.location.href = `/playlist/${selectedPlaylist}`;
+    });
+</script>
+{% endblock %}
