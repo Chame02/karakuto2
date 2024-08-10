@@ -16,16 +16,16 @@
             <input type="text" id="song1" name="song">
         </div>
     </div>
-    <button type="button" onclick="addSong()">曲を追加</button>
-    <button type="button" onclick="showConfirmationPage()">次へ</button>
+    <button type="button" onclick="addSong()" class="btn btn-success mt-3">曲を追加</button>
+    <button type="button" onclick="showConfirmationPage()" class="btn btn-success mt-3">次へ</button>
 </form>
 
 <!-- 確認ページを隠しておく -->
 <div id="confirmationPage" style="display: none;">
     <h2>確認ページ</h2>
     <div id="confirmationContent"></div>
-    <button onclick="goBack()">戻る</button>
-    <button onclick="submitForm()">送信</button>
+    <button onclick="goBack()" class="btn btn-success mt-3">戻る</button>
+    <button onclick="submitForm()" class="btn btn-success mt-3">送信</button>
 </div>
 
 <script>

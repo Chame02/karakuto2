@@ -7,5 +7,5 @@
     {% for playlist in playlists %}
     <p>{{ loop.index }}曲目: アーティスト名 - {{ playlist[0] }}, 曲名 - {{ playlist[1] }}</p>
     {% endfor %}
-    <button onclick="location.href='{{ url_for('index') }}';">ホームに戻る</button>
+    <button onclick="location.href='{{ url_for('index') }}';" class="btn btn-success mt-3">ホームに戻る</button>
 {% endblock %}
