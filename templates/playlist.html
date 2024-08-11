@@ -2,14 +2,18 @@
 {% block title %}プレイリスト{% endblock %}
 
 {% block content%}
-<h1>{{ name }}</h1>
-<ul id="playlist">
-    {% for item in playlist %}
-        <li>{{ item.artist }} - {{ item.song }}</li>
-    {% endfor %}
-</ul>
-<button onclick="location.href='{{ url_for('index') }}';" class="btn btn-success mt-3">戻る</button>
-<button id="okButton" class="btn btn-success mt-3">OK</button>
+<div class="center">
+    <h1 class="name">{{ name }}</h1>
+    <ul class="left" id="playlist">
+        {% for item in playlist %}
+            <li>{{ item.artist }} - {{ item.song }}</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <button onclick="location.href='{{ url_for('index') }}';" class="btn btn-success mt-3">戻る</button>
+    <button id="okButton" class="btn btn-success mt-3">OK</button>
+</div>
+
 
 <script>
     // プレイリストのデータをJavaScriptで保持
