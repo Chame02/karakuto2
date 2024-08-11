@@ -14,7 +14,7 @@
     <button id="okButton" class="btn btn-success mt-3">OK</button>
 </div>
 
-
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
 <script>
     // プレイリストのデータをJavaScriptで保持
     const playlistData = [
@@ -33,6 +33,11 @@
     document.getElementById('okButton').addEventListener('click', function() {
         const selectedSong = getRandomSong();
         updateSelection(selectedSong);
+        confetti({
+	       particleCount: 100,
+	       spread: 70,
+	       origin: { y: 0.6 }
+	     });
     });
 
     // 選択結果を更新する関数
@@ -50,6 +55,11 @@
         document.getElementById('retryButton').addEventListener('click', function() {
             const newSelectedSong = getRandomSong();
             updateSelection(newSelectedSong);
+            confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+            });
         });
     }
 </script>
