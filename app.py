@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, make_response
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -24,9 +24,15 @@ class User(db.Model):
 # ホームページ
 @app.route('/')
 def index():
+    # ユーザのログイン状態をcookieで確認する
+    username = request.cookies.get('username')
+    if username:
+        text = f'<h2 id="username_home">{username}さんようこそ！</h2>'
+    else:
+        text = '<h2 id="username_home">あなたはログインしていません！</h2>'
     playlists_name = db.session.query(AllPlaylist.playlist).group_by(AllPlaylist.playlist).all()
     playlists_name = [p[0] for p in playlists_name]
-    return render_template('index.html', playlists_name=playlists_name)
+    return render_template('index.html', playlists_name=playlists_name, text=text)
 
 # プレイリスト名が/playlist/の後に指定される
 @app.route('/playlist/<name>')
@@ -65,6 +71,7 @@ def confirmation():
     playlists = [[artists[i], songs[i]] for i in range(len(artists))]
     return render_template('confirmation.html',title=title, playlists=playlists)
 
+# ユーザー登録
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -92,6 +99,24 @@ def check_users():
         return f"Total users: {len(users)}"
     else:
         return "No users found"
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        resp = make_response(redirect(url_for('index')))
+        resp.set_cookie('username', username)
+        return resp
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    resp = make_response(redirect(url_for('index')))
+    resp.set_cookie('username','',expires=0)
+    return resp
 
 if __name__=='__main__':
     with app.app_context():
